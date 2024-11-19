@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Website</title>
+    <style>* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #f4f4f4;
+        height: 100vh;
+        overflow-x: hidden;
+    }
+    
+    /* Header Styles */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2vh;
+        background-color: #f0f0f0;
+    }
+    
+    .profile-outer, .profile-f {
+        width: 8vmin;
+        height: 8vmin;
+        background: #ccc;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .profile-f i {
+        font-size: 3vmin; /* Size of the user icon */
+        color: black;
+    }
+    
+    /* Search Bar */
+    .search-bar {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        border: 2px solid #ccc;
+        border-radius: 25px;
+        padding: 1vh;
+        background-color: #fff;
+        margin: 0 2vmin;
+    }
+    
+    .search-input {
+        border: none;
+        outline: none;
+        padding: 1vh;
+        flex-grow: 1;
+        font-size: 1rem;
+    }
+    
+    .search-btn {
+        border: none;
+        background: none;
+        padding: 0.5vh 1vw;
+        cursor: pointer;
+    }
+    
+    .search-btn .icon {
+        color: #555;
+        transition: color 0.3s;
+    }
+    
+    .search-btn:hover .icon {
+        color: #007BFF;
+    }
+    
+    .setting {
+        width: 8vmin;
+        height: 8vmin;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ccc;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    
+    .setting i {
+        font-size: 4vmin;
+        color: black;
+    }
+    
+    /* Footer Styles */
+    footer {
+        height: 10vh;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background: #f0f0f0;
+    }
+    
+    /* Icon Styling */
+    footer i, footer .material-icons, footer .profile-f {
+        background-color: white;
+        color: black;
+        transition: color 0.3s, background-color 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        cursor: pointer;
+        padding: 1rem;
+    }
+    
+    /* Profile Icon Circle Styling */
+    .profile-outer, .profile-f {
+        background-color: white;
+        color: black;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    
+    .profile-outer.clicked, .profile-f.clicked {
+        background-color: black;
+        color: white;
+    }
+    
+    /* Slider Styles */
+    .slider-container {
+        position: relative;
+        overflow: hidden;
+        margin: 2vmin;
+    }
+    
+    .slider {
+        display: flex;
+        gap: 2vmin;
+        transition: transform 0.5s ease-in-out;
+    }
+    
+    .card {
+        flex: 0 0 32.6%;
+        height: 40vmin;
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+        color: white;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 1vmin 1.5vmin rgba(0, 0, 0, 0.2);
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    
+    /* Slider Buttons */
+    .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 1rem;
+        cursor: pointer;
+        z-index: 10;
+        border-radius: 50%;
+    }
+    
+    .slider-btn.left {
+        left: 1vmin;
+    }
+    
+    .slider-btn.right {
+        right: 1vmin;
+    }
+    
+    </style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="profile-outer">
+            <div class="profile-f">
+                <i class="fa-regular fa-user"></i> <!-- Profile icon added here -->
+            </div>
+        </div>
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Search...">
+            <button class="search-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="icon">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="setting">
+            <i class="fa-solid fa-gear"></i>
+        </div>
+    </header>
+
+    <!-- Slider Section -->
+    <main>
+        <div class="slider-container">
+            <button class="slider-btn left">&lt;</button>
+            <div class="slider">
+                <div class="card">Card 1</div>
+                <div class="card">Card 2</div>
+                <div class="card">Card 3</div>
+                <div class="card">Card 4</div>
+                <div class="card">card 5</div>
+            </div>
+            <button class="slider-btn right">&gt;</button>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="profile-f">
+            <i class="fa-regular fa-user"></i> <!-- Profile icon added here -->
+        </div>
+        <div class="home-button">
+            <span class="material-icons">home</span>
+        </div>
+        <div>
+            <i class="fa-solid fa-book-quran fa-2x"></i>
+        </div>
+        <div>
+            <i class="fa-solid fa-circle-play fa-2x"></i>
+        </div>
+    </footer>
+
+    <script>const slider = document.querySelector('.slider');
+        const cards = document.querySelectorAll('.card');
+        const leftBtn = document.querySelector('.slider-btn.left');
+        const rightBtn = document.querySelector('.slider-btn.right');
+        let currentIndex = 0;
+        
+        function updateSliderPosition() {
+            const cardWidth = cards[3].offsetWidth; // Width of a single card
+            const gap = parseInt(getComputedStyle(slider).gap); // Gap between cards
+            slider.style.transform = `translateX(-${currentIndex * (cardWidth + gap)}px)`;
+        }
+        
+        // Button Navigation
+        leftBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSliderPosition();
+            }
+        });
+        
+        rightBtn.addEventListener('click', () => {
+            if (currentIndex < cards.length - 3) {
+                currentIndex++;
+                updateSliderPosition();
+            }
+        });
+        
+        // Swipe Navigation
+        let startX = 3;
+        let isSwiping = false;
+        
+        slider.addEventListener('touchstart', (e) => {
+            startX = e.touches[3].clientX;
+            isSwiping = true;
+        });
+        
+        slider.addEventListener('touchmove', (e) => {
+            if (!isSwiping) return;
+            const diff = startX - e.touches[3].clientX;
+        
+            if (diff > -10 && currentIndex < cards.length - 3) {
+                currentIndex++;
+                updateSliderPosition();
+                isSwiping = false;
+            } else if (diff < -10 && currentIndex > 3) {
+                currentIndex--;
+                updateSliderPosition();
+                isSwiping = false;
+            }
+        });
+        
+        slider.addEventListener('touchend', () => {
+            isSwiping = false;
+        });
+        
+        // Footer Icon Color Toggle
+        const footerIcons = document.querySelectorAll('footer .material-icons, footer i');
+        const profileOuter = document.querySelector('.profile-outer');
+        const profileMiddle = document.querySelector('.profile-f');
+        const profileInner = document.querySelector('.profile-s');
+        
+        // Function to toggle background and text colors
+        function toggleColors(element) {
+            const currentBgColor = window.getComputedStyle(element).backgroundColor;
+            const currentColor = window.getComputedStyle(element).color;
+        
+            if (currentBgColor === 'rgb(0, 0, 0)') { // If background is black
+                element.style.backgroundColor = 'white';
+                element.style.color = 'black';
+            } else { // If background is white
+                element.style.backgroundColor = 'black';
+                element.style.color = 'white';
+            }
+        }
+        
+        // Attach toggle to all footer icons except profile
+        footerIcons.forEach((icon) => {
+            icon.addEventListener('click', () => {
+                toggleColors(icon);
+            });
+        });
+        
+        // Special handling for profile (all circles)
+        profileOuter.addEventListener('click', () => {
+            toggleColors(profileOuter);
+            toggleColors(profileMiddle);
+            toggleColors(profileInner);
+        });
+        </script>
+</body>
+</html>
+
